@@ -41,35 +41,19 @@ public class B {
             }
         }
         if (x1 == x2) {
-            if (x1 == 0) {
-                x1 = 1;
-                x2 = 1;
-            } else {
-                x1--;
-                x2--;
-            }
+            x1 = (x1 + 1) % n;
+            x2 = (x2 + 1) % n;
         } else if (y1 == y2) {
-            if (y1 == 0) {
-                y1 = 1;
-                y2 = 1;
-            } else {
-                y1--;
-                y2--;
-            }
+            y1 = (y1 + 1) % n;
+            y2 = (y2 + 1) % n;
         } else {
-            int tmp = x1;
-            x1 = x2;
-            x2 = tmp;
+            x1 = swap(x2, x2 = x1);
         }
+        grid[x1][y1] = '*';
+        grid[x2][y2] = '*';
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (x1 == i && y1 == j) {
-                    out.print('*');
-                } else if (x2 == i && y2 == j) {
-                    out.print('*');
-                } else {
-                    out.print(grid[i][j]);
-                }
+                out.print(grid[i][j]);
             }
             out.println();
         }
@@ -93,6 +77,10 @@ public class B {
             }
         }
         return tok.nextToken();
+    }
+
+    static int swap(int a, int b) { // usage: y = swap(x, x=y);
+        return a;
     }
 
     static BufferedReader in;
