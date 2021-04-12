@@ -29,6 +29,10 @@ public class Template {
         return tok.nextToken();
     }
 
+    static int swap(int a, int b) { // usage: y = swap(x, x=y);
+        return a;
+    }
+
     static BufferedReader in;
     static PrintWriter out;
     static StringTokenizer tok;
