@@ -69,7 +69,7 @@ public class C {
             left++;
             right--;
         }
-        
+
         if (a < 0 || b < 0) {
             out.println(-1);
         } else {
