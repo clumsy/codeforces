@@ -33,6 +33,14 @@ public class Template {
         return a;
     }
 
+    static int gcd(int a, int b) {
+        while (b > 0) {
+            a %= b;
+            b = swap(a, a = b);
+        }
+        return a;
+    }
+    
     static BufferedReader in;
     static PrintWriter out;
     static StringTokenizer tok;
