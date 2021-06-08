@@ -2,9 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class B1 {
+public class B2 {
     static void solve() {
         int n = readInt();
         int[] w = new int[n];
@@ -18,11 +20,24 @@ public class B1 {
 
     private static void doSolve(int n, int[] w, int[] h) {
         long pairs = 0;
+        Map<Integer, Integer> dimension_to_count = new HashMap<>(n, 1);
+        Map<Long, Integer> dimensions_to_count = new HashMap<>(n, 1);
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if (w[i] == w[j] || h[i] == h[j] || w[i] == h[j] || h[i] == w[j]) {
-                    pairs++;
-                }
+            if (w[i] == h[i]) {
+                int w_count = dimension_to_count.getOrDefault(w[i], 0);
+                dimension_to_count.put(w[i], w_count + 1);
+                pairs += w_count;
+            } else {
+                long min = Math.min(w[i], h[i]);
+                long max = Math.max(w[i], h[i]);
+                long key = min << 32 | max;
+                int exact = dimensions_to_count.getOrDefault(key, 0);
+                dimensions_to_count.put(key, exact + 1);
+                int w_count = dimension_to_count.getOrDefault(w[i], 0);
+                dimension_to_count.put(w[i], w_count + 1);
+                int h_count = dimension_to_count.getOrDefault(h[i], 0);
+                dimension_to_count.put(h[i], h_count + 1);
+                pairs += w_count + h_count - exact;
             }
         }
         out.println(pairs);
