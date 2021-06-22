@@ -2,9 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class D {
     static void solve() {
@@ -15,33 +13,21 @@ public class D {
     }
 
     private static void doSolve(int a, int b, int k) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[] {a, b, k});
-        while (!queue.isEmpty()) {
-            int[] current = queue.remove();
-            int current_k = current[2];
-            int first = current[0];
-            int second = current[1];
-            if (current_k == 0) {
-                if (first == second) {
-                    out.println("YES");
-                    return;
-                }
-                continue;
-            }
-            if (first < second) { // make sure first is smaller
-                first = swap(second, second = first);
-            }
-            if (first == 1) {
-                continue;
-            }
-            for (int i = 2, max = (int) Math.sqrt(first); i <= max; i++) {
-                if (first % i == 0) {
-                    queue.add(new int[] {second, first/i, current_k - 1});
-                }
-            }
+        int gcd = gcd(a, b);
+        int min_moves = 2;
+        if (a == b) {
+            min_moves = 0;
+        } else if (a == gcd || b == gcd) {
+            min_moves = 1;
         }
-        out.println("NO");
+        int max_moves = factors(a).size() + factors(b).size();
+        if (k == 1 && min_moves == 1 && k <= max_moves) { // only one move has to be done and it's possible
+            out.println("YES");
+        } else if (k != 1 && k >= min_moves && k <= max_moves) { // more than one move, but we got enough factors
+            out.println("YES");
+        } else {
+            out.println("NO");
+        }
     }
 
     //////////////////////// Template ////////////////////////
@@ -75,6 +61,28 @@ public class D {
         }
         return a;
     }
+
+    static int lcm(int a, int b) {
+        return a / gcd(a, b) * b;
+    }
+    
+    static List<Integer> factors(int n) {
+        List<Integer> factors = new ArrayList<>();
+        while (n % 2 == 0) {
+            factors.add(2);
+            n /= 2;
+        }
+        for (int i = 3, sqrt = (int) Math.sqrt(n); i <= sqrt; i += 2) {
+            while (n % i == 0) {
+                factors.add(i);
+                n /= i;
+            }
+        }
+        if (n > 1) {
+            factors.add(n);
+        }
+        return factors;
+    } 
     
     static BufferedReader in;
     static PrintWriter out;
