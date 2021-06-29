@@ -33,12 +33,40 @@ public class Template {
         return a;
     }
 
+    private static int lower_bound(int[] a, int lo, int hi, int pivot) {
+        while (lo < hi) {
+            int mid = lo + (hi - lo)/2;
+            if (a[mid] >= pivot) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return lo;
+    }
+
+    private static int upper_bound(int[] a, int lo, int hi, int pivot) {
+        while (lo < hi) {
+            int mid = hi - (hi - lo)/2;
+            if (a[mid] <= pivot) {
+                lo = mid;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return lo;
+    }
+
     static int gcd(int a, int b) {
         while (b > 0) {
             a %= b;
             b = swap(a, a = b);
         }
         return a;
+    }
+
+    static int lcm(int a, int b) {
+        return a / gcd(a, b) * b;
     }
     
     static BufferedReader in;
