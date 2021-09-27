@@ -1,0 +1,9 @@
+[package]
+name = "codeforces"
+version = "0.0.1"
+authors = ["Alexander Jipa <alexander.jipa@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+name = "1A"
+path = "src/1/A.rs"
