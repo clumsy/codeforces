@@ -21,6 +21,10 @@ name = "1615A"
 path = "src/1615/A.rs"
 
 [[bin]]
+name = "1616A"
+path = "src/1616/A.rs"
+
+[[bin]]
 name = "1618A"
 path = "src/1618/A.rs"
 
