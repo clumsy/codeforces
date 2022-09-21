@@ -1,0 +1,7 @@
+n, m = (int(i) for i in input().split())
+a = (int(i) for i in input().split())
+b = (int(i) for i in input().split())
+odd_a = sum(1 for i in a if i & 1 == 1)
+odd_b = sum(1 for i in b if i & 1 == 1)
+res = min(odd_b, (n - odd_a)) + min(odd_a, (m - odd_b))
+print(res)
