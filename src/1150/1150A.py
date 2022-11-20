@@ -1,0 +1,6 @@
+n, m, r = (int(i) for i in input().split())
+s = (int(i) for i in input().split())
+b = (int(i) for i in input().split())
+mb, ms = max(b), min(s)
+res = max(r, mb * (r // ms) + (r % ms))
+print(res)
