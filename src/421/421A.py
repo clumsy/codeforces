@@ -1,0 +1,5 @@
+n, _, _ = (int(i) for i in input().split())
+a = set(int(i) for i in input().split())
+b = set(int(i) for i in input().split())
+res = (1 if i + 1 in a else 2 for i in range(n))
+print(*res)
