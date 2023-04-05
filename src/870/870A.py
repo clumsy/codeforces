@@ -1,0 +1,5 @@
+n, m = (int(i) for i in input().split())
+a = set(int(i) for i in input().split())
+b = set(int(i) for i in input().split())
+res = min(a & b) if a & b else "".join(str(i) for i in sorted((min(a), min(b))))
+print(res)
